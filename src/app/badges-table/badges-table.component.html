@@ -1,0 +1,61 @@
+<nz-table #basicTable [nzData]="dataSet">
+  <thead>
+    <tr>
+      @for(header of headers;track $index){
+      <th>
+        {{ header }}
+      </th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (data of basicTable.data; track data) {
+    <tr>
+      <td>
+        <div class="flex items-center gap-3">
+          <img
+            class="w-[44px] h-[44px]"
+            src="../assets/rocket-icon.png"
+            alt="rocket-icon"
+          />
+          <div class="text-[#344054] font-medium text-[16px]">
+            {{ data.badge }}
+          </div>
+        </div>
+      </td>
+      <td class="text-[#344054] font-medium text-[16px]">
+        {{ data.total_goals }}
+      </td>
+      <td class="text-[#344054] font-medium text-[16px]">
+        {{ data.completed }}
+      </td>
+      <td class="text-[#344054] font-medium text-[16px]">
+        {{ data.in_progress }}
+      </td>
+      <td class="text-[#344054] font-medium text-[16px]">
+        {{ data.not_started }}
+      </td>
+      <td class="text-[#344054] font-medium text-[16px]">
+        <div class="flex items-center">
+          <div class="h-2 rounded-full bg-[#EAEDF2] w-full">
+            <div
+              class="h-2 bg-[#0B7CDA]"
+              style="transition: width 0.5s ease-in-out"
+              [style.width]="data.completion_rate + '%'"
+              [ngClass]="
+                data.completion_rate + '%' !== '100%'
+                  ? 'rounded-s-lg'
+                  : 'rounded-full'
+              "
+            ></div>
+          </div>
+
+          <div class="ml-3 paragraph-paragraph-5 mp-text-base">
+            {{ data.completion_rate }}
+          </div>
+        </div>
+      </td>
+    </tr>
+    }
+  </tbody>
+</nz-table>
